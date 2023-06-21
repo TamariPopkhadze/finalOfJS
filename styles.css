@@ -1,0 +1,83 @@
+.header-div{
+    width: 100%;
+    display: flex;
+    padding-left: 16px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    gap: 126px;
+    align-items: center;
+    background-color: white;
+}
+.titleOfHeader{
+    font-size: 14px;
+}
+.modeDiv{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sizeOfMoon{
+    width: 16px;
+    height: 16px;
+}
+.modeTitle{
+    font-size: 12px;
+}
+#body{
+    background-color: #F2F2F2;
+}
+.searchDiv{
+    width: 343px;
+    height: 48px;
+    background-color: white;
+    margin-top: 24px;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+    gap: 26px;
+    padding-left: 32px;
+   
+}
+.searchInput{
+
+height: 20px;
+border: none;
+}
+.filterRegion{
+    margin-top: 31px;
+    padding-left: 24px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    display: flex;
+    width: 200px;
+    background-color: white;
+    margin-left: 16px;
+    border-radius: 5px;
+    gap: 65px;
+    align-items: center;
+}
+.titleOfFilter{
+    font-size: 12px;
+    line-height: 20px;
+
+}
+.containerOfContinents{
+    width: 200px;
+    border-radius: 5px;
+    margin-left: 16px;
+    margin-top: 11px;
+    padding-left: 24px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: white;
+}
+.continent{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+}
