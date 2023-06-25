@@ -1,5 +1,5 @@
 .header-div{
-    margin-top: 50px;
+    margin-top: 10px;
     width: 100%;
     display: flex;
     padding-left: 16px;
@@ -30,6 +30,7 @@
 #body{
     background-color: #F2F2F2;
 }
+
 .searchDiv{
     width: 343px;
     height: 48px;
@@ -75,7 +76,7 @@ border: none;
     padding-left: 24px;
     padding-bottom: 16px;
     padding-top: 16px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 8px;
     background-color: white;
@@ -84,4 +85,17 @@ border: none;
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
+}
+.containerOfCountries{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 260px;
+    padding-left: 50px;
+}
+.eachCountry{
+    display: flex;
+    width: 264px;
+    flex-direction: column;
 }

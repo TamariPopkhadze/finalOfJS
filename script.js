@@ -2,6 +2,7 @@ let body = document.getElementById('body');
 let mode = document.querySelector('.modeTitle');
 let moon = document.querySelector('.moon');
 let sun = document.querySelector('.sun');
+
 let continentsContainer = document.querySelector('.containerOfContinents')
 
 moon.addEventListener('click', function(){
@@ -29,29 +30,34 @@ sun.addEventListener('click', function(){
     }
  })
     
- 
+    let containerOfCountries = document.querySelector('.containerOfCountries')
+    let eachCountry = document.createElement('div');
 
-
-
-
-
-
-
-
-
-    fetch('https://restcountries.com/v3.1/all?fields', {
-        method:'GET'
+    fetch('https://restcountries.com/v3.1/all?fields')
+    .then((respose) => {
+        return respose.json();
+    })
+    .then(function(mosuliInfo){
         
-    })
-    .then(function(x){
-        if(x.status != 200){
-            throw x.status;
+    //    console.log(mosuliInfo)
+        for(item of mosuliInfo){
+        
+        eachCountry.classList.add('eachCountry') 
+        continentsContainer.appendChild(eachCountry)
+         createName(item.name.common)
         }
-        let info = x.json();
-        console.log(info)
+    } )
 
-    })
-    
+
+
+     function createName(country){
+       
+        let saxeli = document.createElement('h2')
+        saxeli.innerText = country;
+        eachCountry.appendChild(saxeli)
+        // containerOfCountries.appendChild(eachCountry) 
+     }
+  
    
         
         
