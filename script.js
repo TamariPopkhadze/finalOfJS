@@ -31,32 +31,76 @@ sun.addEventListener('click', function(){
  })
     
     let containerOfCountries = document.querySelector('.containerOfCountries')
-    let eachCountry = document.createElement('div');
 
     fetch('https://restcountries.com/v3.1/all?fields')
     .then((respose) => {
         return respose.json();
     })
+
     .then(function(mosuliInfo){
         
-    //    console.log(mosuliInfo)
+        console.log(mosuliInfo)
         for(item of mosuliInfo){
-        
-        eachCountry.classList.add('eachCountry') 
-        continentsContainer.appendChild(eachCountry)
-         createName(item.name.common)
+        let eachCountry = createCountry();
+        containerOfCountries.appendChild(eachCountry)
+        let flag = createFlag(item.flags.svg)
+        eachCountry.appendChild(flag);
+         let name = createName(item.name.common)
+         eachCountry.appendChild(name);
+        let population = createPopulation(item.population)
+        eachCountry.appendChild(population);
+        let region = createRegion(item.region);
+        eachCountry.appendChild(region)
+        if (item.capital)
+        {
+        let capital = createCapital(item.capital[0]);
+        eachCountry.appendChild(capital)
+        }
+        else{
+            let x = 'Undifined'
+            let capital = createCapital( x);
+            eachCountry.appendChild(capital)
+        }
         }
     } )
+    function createCountry() {
+        let eachCountry = document.createElement('div');
+        eachCountry.classList.add('eachCountry')
+        return eachCountry
+    }
 
+    function createFlag(urlOfFlag) {
+        let flag = document.createElement('img');
+        flag.src = urlOfFlag;
+        return flag;
 
+    }
+    
+    function createName(country) {
+        let name = document.createElement('h2')
+        name.innerText = country;
+        return name;
 
-     function createName(country){
-       
-        let saxeli = document.createElement('h2')
-        saxeli.innerText = country;
-        eachCountry.appendChild(saxeli)
-        // containerOfCountries.appendChild(eachCountry) 
-     }
+    }
+    function createPopulation(population) {
+        let number = document.createElement('p')
+        number.innerText = population;
+        return number;
+
+        
+    }
+    function createRegion(region) {
+        let name = document.createElement('p')
+        name.innerText = region;
+        return name;
+
+    }
+function createCapital(city) {
+    let capital = document.createElement('p')
+    capital.innerText = city;
+    return capital;
+
+}
   
    
         

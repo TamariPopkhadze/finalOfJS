@@ -90,7 +90,7 @@ border: none;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     width: 260px;
     padding-left: 50px;
 }
@@ -98,4 +98,5 @@ border: none;
     display: flex;
     width: 264px;
     flex-direction: column;
+    gap: 8px;
 }
