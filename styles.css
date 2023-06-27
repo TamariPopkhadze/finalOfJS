@@ -113,6 +113,9 @@ border: none;
     gap: 3px;
     
 }
+.pointColor{
+    color: black;
+}
 .nameOfCountry{
     font-weight: 800;
     font-size: 18px;
@@ -144,3 +147,11 @@ border: none;
     line-height: 16px;
     color: #111517;
 }
+
+.value{
+    font-size: 14px ;
+}
+.valueColor{
+    color: #FFFFFF;
+}
+
