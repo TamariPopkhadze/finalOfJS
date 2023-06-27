@@ -32,6 +32,19 @@ moon.addEventListener('click', function(){
       value.classList.add('valueColor')
     });
 
+    var moreValues = document.querySelectorAll('.moreValue');
+    moreValues.forEach(function(value) {
+      value.style.color = 'white'
+    });
+    var continents = document.querySelectorAll('.continent');
+    continents.forEach(function(continent) {
+      continent.style.color = 'white'
+    });
+
+    let dark = document.querySelector('.containerOfContinents') 
+    dark.style.backgroundColor ='#2B3844'
+
+
   let darkHeader = document.querySelector('.header-div');
  darkHeader.style.backgroundColor = '#2B3844'
 
@@ -56,6 +69,8 @@ moon.addEventListener('click', function(){
 
   let pointer = document.querySelector('.pointColor');
   pointer.style.color = 'white'
+
+   
 
     
 } 
@@ -111,6 +126,18 @@ sun.addEventListener('click', function(){
 
     let pointer = document.querySelector('.pointColor');
     pointer.style.color = 'black'
+
+    var moreValues = document.querySelectorAll('.moreValue');
+    moreValues.forEach(function(value) {
+      value.style.color = 'black'
+    });
+    var continents = document.querySelectorAll('.continent');
+    continents.forEach(function(continent) {
+      continent.style.color = 'black'
+    });
+
+    let dark = document.querySelector('.containerOfContinents') 
+    dark.style.backgroundColor ='white'
    
 })
 
@@ -133,7 +160,7 @@ sun.addEventListener('click', function(){
       }
  )
     
-    let containerOfCountries = document.querySelector('.containerOfCountries')
+    
 
     fetch('https://restcountries.com/v3.1/all?fields')
     .then((respose) => {
@@ -141,29 +168,57 @@ sun.addEventListener('click', function(){
     })
 
     .then(function(mosuliInfo){
-        // console.log(mosuliInfo)
+      
         for(item of mosuliInfo){
-
+         
+        // console.log(item.borders)
         let eachCountry = createCountry();
         let countryName = createEmptyCSSClass(item.name.common)
         let continent = createEmptyCSSClass(item.region);
         eachCountry.classList.add(continent)
         eachCountry.classList.add(countryName)
-        containerOfCountries.appendChild(eachCountry)
-        let infoContainer = document.createElement('div');
+
         
-        infoContainer.classList.add('containerOfInfo');
+
+        let containerOfCountries = document.querySelector('.containerOfCountries')
+        containerOfCountries.appendChild(eachCountry)
+
+        let infoContainer = document.createElement('div');
+        infoContainer.classList.add('containerOfInfo'); 
+
+        let moreInformation = document.createElement('div');
+        moreInformation.classList.add('containerOfMoreInfo');
+
+        let thirdDivOfInformation = document.createElement('div');
+        thirdDivOfInformation.classList.add('thirdInformation')
+
+
         let flag = createFlag(item.flags.svg)
         eachCountry.appendChild(flag);
-
+         
         let name = createName(item.name.common)
         eachCountry.appendChild(name);
 
         let population = createPopulation(item.population)
         infoContainer.appendChild(population);
-
+        
         let region = createRegion(item.region);
         infoContainer.appendChild(region)
+
+        let tld = createtTld(item.tld);
+        moreInformation.appendChild(tld)
+
+        
+
+        let subRegion = createSubRegion(item.subregion);
+        moreInformation.appendChild(subRegion)
+        
+        
+        
+
+        if(item.currencies){
+         let currency = createCurrencies(item.currencies)
+              moreInformation.appendChild(currency)}
 
         if (item.capital)
         {
@@ -175,7 +230,30 @@ sun.addEventListener('click', function(){
             let capital = createCapital( x);
             infoContainer.appendChild(capital)
         }
+        
+
+        if(item.borders){
+          let border = item.borders
+          console.log(border)
+          let borders = createBorderCountries(mosuliInfo,border)
+          thirdDivOfInformation.appendChild(borders)
+          }
+
+        if(item.languages){
+          let language = createLanguages(item.languages)
+           moreInformation.appendChild(language)
+          }
+          
+
+        
         eachCountry.appendChild(infoContainer)
+        eachCountry.appendChild(moreInformation)
+        eachCountry.appendChild(thirdDivOfInformation)
+
+      
+       
+        
+        
         }
     } )
 
@@ -232,20 +310,132 @@ sun.addEventListener('click', function(){
         return div;
 
     }
-function createCapital(city) {
+  function createCapital(city) {
+      let div = document.createElement('div')
+          div.classList.add("infoDiv");
+          let title = document.createElement('p')
+          title.classList.add('title')
+          title.innerText = 'Capital:  '
+          div.appendChild(title)
+      let capital = document.createElement('p')
+      capital.innerText = city;
+      capital.classList.add('value')
+      div.appendChild(capital)
+      return div;
+
+  }
+  function createSubRegion(region) {
     let div = document.createElement('div')
-        div.classList.add("infoDiv");
-        let title = document.createElement('p')
-        title.classList.add('title')
-        title.innerText = 'Capital:  '
-        div.appendChild(title)
-    let capital = document.createElement('p')
-    capital.innerText = city;
-    capital.classList.add('value')
-    div.appendChild(capital)
+    div.classList.add("infoDiv");
+    let title = document.createElement('p')
+    title.classList.add('title')
+    title.innerText = 'Sub Region:  '
+    div.appendChild(title)
+    let name = document.createElement('p')
+    name.innerText = region;
+    name.classList.add('moreValue')
+    div.appendChild(name)
     return div;
 
 }
+function createLanguages(languages){
+  
+    let div = document.createElement('div')
+    div.classList.add("infoDiv");
+    let title = document.createElement('p')
+    title.classList.add('title')
+    title.innerText = 'Languages:  '
+    div.appendChild(title)
+    
+    let languagesDiv = document.createElement('div');
+        languagesDiv.classList.add('languagesDiv')
+    let x = Object.values(languages)
+    count = 0;
+    for ( item of x){
+      let eachLanguage = document.createElement('p');
+      eachLanguage.innerHTML = item;
+      eachLanguage.classList.add('moreValue')
+      languagesDiv.appendChild(eachLanguage)
+      if(count != x.length -1 ){
+        let space = document.createElement('p');
+        space.innerHTML = ',';
+        languagesDiv.appendChild(space)
+        count++;
+        
+      }
+      
+    }
+    div.appendChild(languagesDiv);
+    return div;
+  
+}
+
+function createCurrencies(currency){
+  
+  let div = document.createElement('div')
+  div.classList.add("infoDiv");
+  let title = document.createElement('p')
+  title.classList.add('title')
+  title.innerText = 'Currency:  '
+  div.appendChild(title)
+  let valueOfCurrency = Object.values(currency)[0].name;
+  let eachCurrency = document.createElement('p');
+  eachCurrency.innerText = valueOfCurrency;
+  eachCurrency.classList.add('moreValue')
+  div.appendChild(eachCurrency);
+  return div;
+
+
+}
+function createtTld(tld) {
+  let div = document.createElement('div')
+  div.classList.add("infoDiv");
+  let title = document.createElement('p')
+  title.classList.add('title')
+  title.innerText = 'Top Level Domain:  '
+  div.appendChild(title)
+  let name = document.createElement('p')
+  name.innerText = tld;
+  name.classList.add('moreValue')
+  div.appendChild(name)
+  return div;
+
+}
+
+function createBorderCountries(data , countries){
+  let borderCountriesDiv = document.createElement('div');
+  borderCountriesDiv.classList.add('borders');
+  let title = document.createElement('h2');
+  title.innerHTML = 'Border Countries:';
+  title.classList.add('titleOfBorders')
+  borderCountriesDiv.appendChild(title)
+  let container = document.createElement('div');
+  container.classList.add('containerOfBorders')
+  
+    for(item of countries){
+      for(element of data){
+        if(item == element.cca3){
+
+          let eachBorder = document.createElement('div')
+          eachBorder.classList.add('eachBorder')
+          let eachBorderName = document.createElement('p');
+          eachBorderName.innerText = element.name.common;
+          eachBorderName.classList.add('borderNames')
+          eachBorder.appendChild(eachBorderName)
+          container.appendChild(eachBorder)
+
+        }
+      }
+    }
+    borderCountriesDiv.appendChild(container)
+    return borderCountriesDiv;
+    }
+
+
+
+
+
+  
 
 
 function createEmptyCSSClass(className) {
@@ -294,8 +484,18 @@ function createEmptyCSSClass(className) {
 
         })
     });
+
+    
+
    
-        
+   
+ 
+  
+  
+  
+  
+  
+  
         
 
     
