@@ -170,8 +170,8 @@ sun.addEventListener('click', function(){
     .then(function(mosuliInfo){
       
         for(item of mosuliInfo){
-         
-        // console.log(item.borders)
+        //  console.log(item)
+        
         let eachCountry = createCountry();
         let countryName = createEmptyCSSClass(item.name.common)
         let continent = createEmptyCSSClass(item.region);
@@ -232,12 +232,6 @@ sun.addEventListener('click', function(){
         }
         
 
-        if(item.borders){
-          let border = item.borders
-          console.log(border)
-          let borders = createBorderCountries(mosuliInfo,border)
-          thirdDivOfInformation.appendChild(borders)
-          }
 
         if(item.languages){
           let language = createLanguages(item.languages)
@@ -350,8 +344,10 @@ function createLanguages(languages){
     let languagesDiv = document.createElement('div');
         languagesDiv.classList.add('languagesDiv')
     let x = Object.values(languages)
+    // console.log(x)
     count = 0;
     for ( item of x){
+  
       let eachLanguage = document.createElement('p');
       eachLanguage.innerHTML = item;
       eachLanguage.classList.add('moreValue')
@@ -402,42 +398,6 @@ function createtTld(tld) {
 
 }
 
-function createBorderCountries(data , countries){
-  let borderCountriesDiv = document.createElement('div');
-  borderCountriesDiv.classList.add('borders');
-  let title = document.createElement('h2');
-  title.innerHTML = 'Border Countries:';
-  title.classList.add('titleOfBorders')
-  borderCountriesDiv.appendChild(title)
-  let container = document.createElement('div');
-  container.classList.add('containerOfBorders')
-  
-    for(item of countries){
-      for(element of data){
-        if(item == element.cca3){
-
-          let eachBorder = document.createElement('div')
-          eachBorder.classList.add('eachBorder')
-          let eachBorderName = document.createElement('p');
-          eachBorderName.innerText = element.name.common;
-          eachBorderName.classList.add('borderNames')
-          eachBorder.appendChild(eachBorderName)
-          container.appendChild(eachBorder)
-
-        }
-      }
-    }
-    borderCountriesDiv.appendChild(container)
-    return borderCountriesDiv;
-    }
-
-
-
-
-
-  
-
-
 function createEmptyCSSClass(className) {
   var name = className ; 
   var withoutSpaces = name.replace(/\s/g, "");
@@ -461,6 +421,8 @@ function createEmptyCSSClass(className) {
       
   
     });
+
+ 
       
     
 
@@ -485,6 +447,8 @@ function createEmptyCSSClass(className) {
         })
     });
 
+
+ 
     
 
    
